@@ -1,0 +1,45 @@
+{
+  "name": "xp-autobadt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension to export HIS/EMR CLS results to merged PDF from a list of maHoSo.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier \"**/*.{md,html,json,css,ts}\" --write",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "pdf-lib": "^1.17.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.2.0",
+    "@eslint/js": "^9.19.0",
+    "@types/chrome": "^0.0.287",
+    "@types/xlsx": "^0.0.36",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "globals": "^15.14.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0",
+    "vite": "^6.0.11"
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "eslint --fix"
+    ],
+    "**/*.{md,html,json,css}": [
+      "prettier --write"
+    ]
+  }
+}

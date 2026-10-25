@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XP-AutoBADT</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="/icons/icon-128.png" width="40" height="40" alt="" />
+      <div>
+        <h1>XP-AutoBADT</h1>
+        <p class="subtitle">Xuất PDF tổng hợp CLS từ danh sách mã hồ sơ</p>
+      </div>
+    </header>
+
+    <section class="card" id="auth-card">
+      <div class="row">
+        <span class="label">Phiên HIS</span>
+        <span id="auth-badge" class="badge badge-off">Chưa có token</span>
+      </div>
+      <p id="auth-detail" class="hint">
+        Mở tab <code>172.16.16.17:2382</code> và đăng nhập. Extension sẽ tự lấy
+        token.
+      </p>
+    </section>
+
+    <section class="card" id="mode-card">
+      <div class="label">Luồng xuất</div>
+      <div class="mode-row">
+        <label class="choice">
+          <input type="radio" name="export-mode" value="cls" checked />
+          Đầy đủ CLS
+        </label>
+        <label class="choice">
+          <input type="radio" name="export-mode" value="ksk" />
+          Phiếu khám sức khỏe
+        </label>
+      </div>
+    </section>
+
+    <section class="card" id="manual-card">
+      <label class="label" for="manual-input">Nhập mã hồ sơ</label>
+      <textarea
+        id="manual-input"
+        rows="4"
+        placeholder="Một mã mỗi dòng, hoặc cách nhau bởi dấu phẩy / ;"
+      ></textarea>
+      <p id="manual-summary" class="hint">Hoặc dùng file Excel bên dưới</p>
+    </section>
+
+    <section class="card" id="prefix-card">
+      <div id="ksk-kind-block" hidden>
+        <div class="label">Loại phiếu</div>
+        <div class="mode-row">
+          <label class="choice">
+            <input type="radio" name="ksk-kind" value="giay-06-18" checked />
+            Khám sức khỏe người từ đủ 06 đến dưới 18 tuổi
+          </label>
+          <label class="choice">
+            <input type="radio" name="ksk-kind" value="so-dinh-ky" />
+            Giấy khám sức khỏe định kỳ
+          </label>
+        </div>
+      </div>
+      <label class="label prefix-label" for="prefix-input">Tiền tố tên file</label>
+      <input
+        id="prefix-input"
+        type="text"
+        autocomplete="off"
+        placeholder="Không bắt buộc. Ví dụ DOT1"
+      />
+      <p class="hint">
+        Có tiền tố: tiền tố_mã nhân viên_Tên NB_CCCD.pdf. Để trống tiền tố, mã
+        nhân viên hoặc CCCD thì bỏ qua phần đó. Nếu mã nhân viên có dấu -, chỉ
+        lấy phần sau dấu -. Có chữ "lớp" thì bỏ chữ đó, ví dụ lớp 9A thành 9A.
+        Đầy đủ CLS và phiếu KSK dùng cùng cách đặt tên khi Excel có các cột
+        này. Nhập tay hoặc Excel chỉ có mã hồ sơ thì file là mã hồ sơ.pdf.
+      </p>
+    </section>
+
+    <section class="card">
+      <label class="label" id="excel-label" for="excel-input"
+        >File Excel .xlsx / .xls (cột Mã hồ sơ)</label
+      >
+      <input
+        id="excel-input"
+        type="file"
+        accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+      />
+      <p id="excel-summary" class="hint">Chưa chọn file</p>
+    </section>
+
+    <section class="card actions">
+      <div class="btn-row">
+        <button id="export-btn" type="button" disabled>Xuất PDF</button>
+        <button id="stop-btn" type="button" class="btn-danger" disabled hidden>
+          Dừng
+        </button>
+      </div>
+      <p id="folder-summary" class="hint">
+        Mỗi lần xuất đều hỏi thư mục lưu PDF. Hồ sơ đã có file PDF trong thư
+        mục sẽ được bỏ qua.
+      </p>
+      <p id="progress" class="hint"></p>
+      <p class="hint">
+        Giữ side panel mở khi xuất. Bắt PDF thật khi preview load (CDP).
+        Fallback: canvas đã vẽ. Có thể thấy banner debugger tạm thời.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="label">Nhật ký</div>
+      <ul id="log" class="log"></ul>
+    </section>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

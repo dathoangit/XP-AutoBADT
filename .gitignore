@@ -1,0 +1,16 @@
+*~
+*.DS_Store
+node_modules
+dist
+_debug
+_metadata
+**/*.swp
+*.log
+.vite
+
+# Auth / browser profile / patient output (legacy CLI)
+.chrome-profile
+.auth.json
+output/*
+!output/.gitkeep
+*.pdf
